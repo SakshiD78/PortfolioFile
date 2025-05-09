@@ -1,1 +1,458 @@
-<P>Hellow World</P>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Professional Portfolio - Sakshi Joshi</title>
+<style>
+  /* Reset and base */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #091b25;
+    color: #f0f0f0;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  a {
+    color: #00d084;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  a:hover, a:focus {
+    color: #00ffa6;
+    outline: none;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    display: block;
+  }
+  h1, h2, h3 {
+    margin-top: 0;
+    font-weight: 700;
+  }
+  p {
+    color: #ccc;
+    margin-top: 0;
+  }
+  /* Container */
+  .container {
+    max-width: 900px;
+    padding: 30px 20px;
+    margin: 0 auto;
+  }
+  /* Header */
+  header {
+    position: sticky;
+    top: 0;
+    background: #121212dd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #00d084;
+    z-index: 1000;
+  }
+  header h1 {
+    font-size: 1.8rem;
+    letter-spacing: 3px;
+  }
+  nav {
+    display: flex;
+    gap: 25px;
+  }
+  nav a {
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+    padding: 5px 0;
+  }
+  nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%;
+    height: 3px;
+    background: #00d084;
+    transition: width 0.3s ease;
+    border-radius: 2px;
+  }
+  nav a:hover::after,
+  nav a:focus::after {
+    width: 100%;
+  }
+  /* Hamburger menu for mobile */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    width: 28px;
+    height: 22px;
+    justify-content: space-between;
+  }
+  .hamburger span {
+    background: #00d084;
+    height: 3.5px;
+    border-radius: 3px;
+    display: block;
+  }
+  /* Mobile nav styles */
+  @media (max-width: 720px) {
+    .container {
+      max-width: 100%;
+      padding: 15px 15px 35px;
+    }
+    nav {
+      position: fixed;
+      top: 64px;
+      right: 0;
+      background: #121212;
+      height: calc(100vh - 64px);
+      width: 250px;
+      flex-direction: column;
+      padding: 25px 20px;
+      gap: 25px;
+      box-shadow: -3px 0 10px rgba(0, 208, 132, 0.6);
+      transform: translateX(100%);
+      transition: transform 0.35s ease;
+    }
+    nav.open {
+      transform: translateX(0);
+    }
+    .hamburger {
+      display: flex;
+    }
+  }
+  /* Main Sections and Animation */
+  section {
+    margin-bottom: 50px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* Hero Section */
+  .hero {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .hero h2 {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    color: #00d084;
+  }
+  .hero p {
+    font-size: 1.1rem;
+    color: #bbb;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  /* About Section */
+  #about .about-content {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  #about img {
+    flex-shrink: 0;
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border: 3px solid #00d084;
+  }
+  #about p {
+    flex: 1 1 300px;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  /* Projects Section */
+  #projects h2 {
+    margin-bottom: 20px;
+    border-bottom: 3px solid #00d084;
+    display: inline-block;
+    padding-bottom: 6px;
+    font-size: 1.8rem;
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 25px;
+  }
+  .project {
+    background: #1e1e1e;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 8px 22px rgb(0 208 132 / 0.3);
+    color: #e0e0e0;
+    cursor: default;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+    outline-offset: 3px;
+  }
+  .project:hover,
+  .project:focus-within {
+    transform: translateY(-7px) scale(1.03);
+    box-shadow: 0 14px 35px rgb(0 208 132 / 0.7);
+  }
+  .project img {
+    border-radius: 12px;
+    margin-bottom: 16px;
+    transition: transform 0.3s ease;
+  }
+  .project img:hover,
+  .project img:focus {
+    transform: scale(1.07);
+  }
+  .project h3 {
+    font-size: 1.3rem;
+    margin-bottom: 11px;
+    color: #00d084;
+  }
+  .project p {
+    font-size: 1rem;
+    margin-bottom: 14px;
+    color: #bbb;
+  }
+  .project a {
+    font-weight: 700;
+    color: #00d084;
+    font-size: 1rem;
+  }
+  .project a:hover,
+  .project a:focus {
+    color: #00ffa6;
+  }
+  /* Contact Section */
+  #contact h2 {
+    margin-bottom: 25px;
+    border-bottom: 3px solid #00d084;
+    padding-bottom: 6px;
+    font-size: 1.8rem;
+  }
+  form {
+    max-width: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  form label {
+    font-weight: 700;
+    margin-bottom: 6px;
+    font-size: 1rem;
+  }
+  form input, form textarea {
+    background: #222;
+    border: none;
+    color: #eee;
+    padding: 14px 18px;
+    margin-bottom: 22px;
+    font-size: 1rem;
+    border-radius: 12px;
+    transition: background-color 0.3s ease;
+    resize: vertical;
+    font-family: inherit;
+  }
+  form input:focus, form textarea:focus {
+    background-color: #2c2c2c;
+    outline: none;
+  }
+  form textarea {
+    min-height: 110px;
+  }
+  form button {
+    background: #00d084;
+    border: none;
+    color: #121212;
+    font-weight: 700;
+    padding: 16px 0;
+    font-size: 1.2rem;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  form button:hover,
+  form button:focus {
+    background-color: #00b869;
+    outline: none;
+    transform: scale(1.05);
+  }
+  /* Social Links */
+  .social-links {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+  }
+  .social-links a {
+    font-size: 2rem;
+    color: #00d084;
+    transition: color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .social-links a:hover,
+  .social-links a:focus {
+    color: #00ffa6;
+    outline: none;
+  }
+  /* Footer */
+  footer {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #555;
+    padding: 25px 10px;
+    border-top: 1px solid #222;
+    user-select: none;
+  }
+  /* Accessibility focus */
+  a:focus, button:focus, input:focus, textarea:focus {
+    outline: 3px solid #00d084;
+    outline-offset: 3px;
+  }
+</style>
+</head>
+<body>
+  <header role="banner">
+    <div class="container" style="display:flex; justify-content: space-between; align-items: center;">
+      <h1>SAKSHI Joshi</h1>
+      <nav aria-label="Primary navigation" id="primary-nav">
+        <a href="#about" tabindex="0">About</a>
+        <a href="#projects" tabindex="0">Projects</a>
+        <a href="#contact" tabindex="0">Contact</a>
+      </nav>
+      <div class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" role="button" tabindex="0" aria-controls="primary-nav" aria-haspopup="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <main role="main" class="container">
+    <section class="hero" aria-label="Introduction">
+      <h2>Hello, I'm Your Sakshi</h2>
+      <p>A passionate web developer crafting professional, responsive, and modern websites with smooth animations.</p>
+    </section>
+
+    <section id="about" aria-label="About me">
+      <div class="about-content">
+        <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=180&w=180" alt="Portrait photo of Your Name" />
+        <p>
+          I'm Your Sakshi, a full-stack web developer focused on building clean and efficient user experiences using modern web technologies. I emphasize quality, accessibility, and performance in all my projects.
+        </p>
+      </div>
+    </section>
+
+    <section id="projects" aria-label="Projects portfolio">
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <article class="project" tabindex="0">
+          <img src="https://images.pexels.com/photos/449145/pexels-photo-449145.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=180&w=350" alt="Screenshot of Project One" />
+          <h3>Project One</h3>
+          <p>A responsive e-commerce site built using React and Tailwind CSS, delivering smooth UI and user journey.</p>
+          <a href="https://github.com/yourusername/project-one" target="_blank" rel="noopener noreferrer" aria-label="View Project One on GitHub">View on GitHub</a>
+        </article>
+        <article class="project" tabindex="0">
+          <img src="https://images.pexels.com/photos/574073/pexels-photo-574073.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=180&w=350" alt="Screenshot of Project Two" />
+          <h3>Project Two</h3>
+          <p>A weather web app using OpenWeather API, designed with a clean interface and detailed forecasts.</p>
+          <a href="https://github.com/yourusername/project-two" target="_blank" rel="noopener noreferrer" aria-label="View Project Two on GitHub">View on GitHub</a>
+        </article>
+        <article class="project" tabindex="0">
+          <img src="https://images.pexels.com/photos/1181676/pexels-photo-1181676.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=180&w=350" alt="Screenshot of Project Three" />
+          <h3>Project Three</h3>
+          <p>A personal blog platform with Markdown support and a friendly UI built with Node.js and Express.</p>
+          <a href="https://github.com/yourusername/project-three" target="_blank" rel="noopener noreferrer" aria-label="View Project Three on GitHub">View on GitHub</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" aria-label="Contact form">
+      <h2>Contact Me</h2>
+      <form id="contact-form" method="POST" action="mailto:your.email@example.com" enctype="text/plain" aria-label="Contact form">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your full name" required autocomplete="name" />
+        
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="your.email@example.com" required autocomplete="email" />
+        
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
+        
+        <button type="submit" aria-label="Send message">Send</button>
+      </form>
+      <div class="social-links" aria-label="Social media links">
+        <a href="https://twitter.com/yourhandle" target="_blank" rel="noopener noreferrer" aria-label="Twitter">🐦</a>
+        <a href="https://linkedin.com/in/yourhandle" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">🔗</a>
+        <a href="https://github.com/yourhandle" target="_blank" rel="noopener noreferrer" aria-label="GitHub">🐙</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2024 Your Name. All rights reserved.
+  </footer>
+
+  <script>
+    // Mobile hamburger toggle
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('primary-nav');
+
+    function toggleNav() {
+      const expanded = hamburger.getAttribute('aria-expanded') === 'true' || false;
+      hamburger.setAttribute('aria-expanded', !expanded);
+      nav.classList.toggle('open');
+    }
+
+    hamburger.addEventListener('click', toggleNav);
+    hamburger.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleNav();
+      }
+    });
+
+    // Close mobile nav when clicking a link (for better UX)
+    nav.querySelectorAll('a').forEach(link =>
+      link.addEventListener('click', () => {
+        if (nav.classList.contains('open')) {
+          toggleNav();
+        }
+      })
+    );
+
+    // Scroll reveal animations using Intersection Observer
+    function observeFadeIn(elements) {
+      const observer = new IntersectionObserver((entries, observerSelf) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observerSelf.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      elements.forEach(el => observer.observe(el));
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const fadeElements = Array.from(document.querySelectorAll('section'));
+      observeFadeIn(fadeElements);
+    });
+  </script>
+</body>
+</html>
